@@ -311,7 +311,7 @@
                 {
                     return $"Flight {code}: From {fromCities[i]} to {toCities[i]}, " +
                            $"Departure: {departureTimes[i]}, Duration: {durations[i]} mins, " +
-                           $"Price: ${prices[i]}, Destination: {destinations[i]}";
+                           $"Price: ${prices[i]}, Destination: {destinations[i]}, Passenger : {passengerNames[i]} ";
                 }
             }
 
