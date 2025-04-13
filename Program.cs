@@ -423,8 +423,7 @@
             Console.WriteLine("7. Validate Flight Code");
             Console.WriteLine("8. Display Flight Details");
             Console.WriteLine("9. Search Bookings by Destination");
-            Console.WriteLine("10. Calculate Fare");
-            Console.WriteLine("11. Exit Application");
+            Console.WriteLine("10. Exit Application");
 
             return "Menu displayed.";
         }
@@ -490,11 +489,6 @@
                         // Added error handling for destination
                         Console.Write("Enter destination: ");
                         string destination = Console.ReadLine();
-                        if (string.IsNullOrEmpty(destination))
-                        {
-                            Console.WriteLine("Invalid destination. Using 'Unknown' as default.");
-                            destination = "Unknown";
-                        }
 
                         // Call AddFlight function
                         string addFlightResult = AddFlight(flightCode, fromCity, toCity, departureTime, duration, price, destination);
@@ -594,6 +588,156 @@
 
                     case "6":
                         // Book flight
+                        // input promo code 
+
+                        Console.WriteLine("Enter promo code to apply discount (or leave blank for no discount): ");
+                        // Added error handling for promo code
+                        string promoCode = Console.ReadLine();
+                        int discount = 0;
+                        while (true)
+                        {
+                            if (promoCode == "")
+                            {
+                                discount = 0;
+                                break;
+                            }
+                            else if (promoCode == "Air20")
+                            {
+
+                                Console.Write("Enter base price: ");
+                                int basePrice = int.Parse(Console.ReadLine());
+                                // Added error handling for base price
+                                if (basePrice <= 0)
+                                {
+                                    Console.WriteLine("Invalid base price. Using 100 as default.");
+                                    basePrice = 100;
+                                }
+
+                                Console.Write("Enter number of tickets: ");
+                                int numTickets = int.Parse(Console.ReadLine());
+                                // Added error handling for number of tickets
+                                if (numTickets <= 0)
+                                {
+                                    Console.WriteLine("Invalid number of tickets. Using 1 as default.");
+                                    numTickets = 1;
+                                }
+                                // Added error handling for discount
+                                int discountInput = 20; // Default discount
+                                if (discountInput > 0)
+                                {
+                                    discount = discountInput;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid discount. Using 0 as default.");
+                                    discount = 0;
+                                }
+                                // Call CalculateFare function
+                                string fareResult;
+                                if (discount > 0)
+                                {
+                                    fareResult = CalculateFare(basePrice, numTickets, discount);
+                                }
+                                else
+                                {
+                                    fareResult = CalculateFare(basePrice, numTickets);
+                                }
+                                Console.WriteLine(fareResult);
+                                break;
+                            }
+                            else if (promoCode == "Air30")
+                            {
+                                Console.Write("Enter base price: ");
+                                int basePrice = int.Parse(Console.ReadLine());
+                                // Added error handling for base price
+                                if (basePrice <= 0)
+                                {
+                                    Console.WriteLine("Invalid base price. Using 100 as default.");
+                                    basePrice = 100;
+                                }
+
+                                Console.Write("Enter number of tickets: ");
+                                int numTickets = int.Parse(Console.ReadLine());
+                                // Added error handling for number of tickets
+                                if (numTickets <= 0)
+                                {
+                                    Console.WriteLine("Invalid number of tickets. Using 1 as default.");
+                                    numTickets = 1;
+                                }
+                                // Added error handling for discount
+                                int discountInput = 30; // Default discount
+                                if (discountInput > 0)
+                                {
+                                    discount = discountInput;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid discount. Using 0 as default.");
+                                    discount = 0;
+                                }
+                                // Call CalculateFare function
+                                string fareResult;
+                                if (discount > 0)
+                                {
+                                    fareResult = CalculateFare(basePrice, numTickets, discount);
+                                }
+                                else
+                                {
+                                    fareResult = CalculateFare(basePrice, numTickets);
+                                }
+                                Console.WriteLine(fareResult);
+                                break;
+                            }
+                            else if (promoCode == "Air50")
+                            {
+                                Console.Write("Enter base price: ");
+                                int basePrice = int.Parse(Console.ReadLine());
+                                // Added error handling for base price
+                                if (basePrice <= 0)
+                                {
+                                    Console.WriteLine("Invalid base price. Using 100 as default.");
+                                    basePrice = 100;
+                                }
+
+                                Console.Write("Enter number of tickets: ");
+                                int numTickets = int.Parse(Console.ReadLine());
+                                // Added error handling for number of tickets
+                                if (numTickets <= 0)
+                                {
+                                    Console.WriteLine("Invalid number of tickets. Using 1 as default.");
+                                    numTickets = 1;
+                                }
+                                // Added error handling for discount
+                                int discountInput = 50; // Default discount
+                                if (discountInput > 0)
+                                {
+                                    discount = discountInput;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid discount. Using 0 as default.");
+                                    discount = 0;
+                                }
+                                // Call CalculateFare function
+                                string fareResult;
+                                if (discount > 0)
+                                {
+                                    fareResult = CalculateFare(basePrice, numTickets, discount);
+                                }
+                                else
+                                {
+                                    fareResult = CalculateFare(basePrice, numTickets);
+                                }
+                                Console.WriteLine(fareResult);
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid promo code. Please enter a valid code or leave blank.");
+                                promoCode = Console.ReadLine();
+                            }
+                        }
+                        // Book flight
                         Console.Write("Enter passenger name: ");
                         string passengerNameToBook = Console.ReadLine();
                         Console.Write("Enter flight code to book (or leave blank for default): ");
@@ -620,7 +764,9 @@
                         {
                             Console.WriteLine($"Flight booked successfully for {passengerNameToBook}.");
                         }
+
                         break;
+
 
                     case "7":
                         // Validate flight code
@@ -671,7 +817,7 @@
                         // Added confirmation message
                         string confirmSearch = ConfirmAction("search bookings by destination");
                         Console.WriteLine(confirmSearch);
-                        if (confirmSearch.Contains("cancelled"))
+                        if (confirmSearch == "cancelled")
                         {
                             Console.WriteLine("Booking search cancelled.");
                         }
@@ -682,77 +828,9 @@
                         break;
 
                     case "10":
-                        // Calculate fare
-                        Console.Write("Enter base price: ");
-                        int basePrice = int.Parse(Console.ReadLine());
-                        // Added error handling for base price
-                        if (basePrice <= 0)
-                        {
-                            Console.WriteLine("Invalid base price. Using 100 as default.");
-                            basePrice = 100;
-                        }
-
-                        Console.Write("Enter number of tickets: ");
-                        int numTickets = int.Parse(Console.ReadLine());
-                        // Added error handling for number of tickets
-                        if (numTickets <= 0)
-                        {
-                            Console.WriteLine("Invalid number of tickets. Using 1 as default.");
-                            numTickets = 1;
-                        }
-                        // Added error handling for discount
-                        Console.Write("Enter discount (optional, default 0): ");
-                        int discountInput = int.Parse(Console.ReadLine());
-                        int discount = 0;
-                        if (discountInput > 0)
-                        {
-                            discount = discountInput;
-                        }
-                        // Added error handling for discount
-                        if (discount < 0)
-                        {
-                            Console.WriteLine("Invalid discount. Using 0 as default.");
-                            discount = 0;
-                        }
-                        // Call CalculateFare function
-                        string fareResult;
-                        if (discount > 0)
-                        {
-                            fareResult = CalculateFare(basePrice, numTickets, discount);
-                        }
-                        else
-                        {
-                            fareResult = CalculateFare(basePrice, numTickets);
-                        }
-                        Console.WriteLine(fareResult);
-                        // Added confirmation message
-                        string confirmFare = ConfirmAction("calculate fare");
-                        Console.WriteLine(confirmFare);
-                        if (confirmFare.Contains("cancelled"))
-                        {
-                            Console.WriteLine("Fare calculation cancelled.");
-                        }
-                        else
-                        {
-                            Console.WriteLine($"Fare calculated successfully.");
-                        }
-                        break;
-
-                    case "11":
                         // Exit application
                         string exitResult = ExitApplication();
                         Console.WriteLine(exitResult);
-                        // Added confirmation message
-                        string confirmExit = ConfirmAction("exit application");
-                        Console.WriteLine(confirmExit);
-                        if (confirmExit.Contains("cancelled"))
-                        {
-                            Console.WriteLine("Application exit cancelled.");
-                        }
-                        else
-                        {
-                            Console.WriteLine("Exiting application...");
-                        }
                         break;
 
                     default:
@@ -772,5 +850,6 @@
             // Start the airline reservation system
             StartSystem();
         }
+
     }
 }
