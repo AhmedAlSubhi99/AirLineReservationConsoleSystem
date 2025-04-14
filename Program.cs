@@ -62,9 +62,9 @@
         public static string DisplayWelcomeMessage()
         {
             // Display welcome message
-            Console.WriteLine("=====================================");
-            Console.WriteLine("Welcome to the Airline Reservation System");
-            Console.WriteLine("=====================================");
+            Console.WriteLine("=============================================");
+            Console.WriteLine("| Welcome to the Airline Reservation System |");
+            Console.WriteLine("=============================================");
             return "Welcome!";
         }
 
@@ -1120,6 +1120,7 @@
             }
         }
 
+        // Main function
         static void Main(string[] args)
         {
             // Start the airline reservation system
